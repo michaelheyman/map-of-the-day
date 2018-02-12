@@ -111,6 +111,12 @@ vmin, vmax = round(min(pop_dens_list),2), round(max(pop_dens_list),2)
 # plot the graph
 ax = data.plot(column='POPSQKM', cmap='Wistia', scheme='quantiles', figsize=(plot_size))
 
+# put labels on center of states
+for idx, row in data.iterrows():
+    if row['STUSPS10'] != 'DC':
+        plt.annotate(s=row['STUSPS10'], xy=(row['geometry'].centroid.x, row['geometry'].centroid.y),
+                 horizontalalignment='center', alpha=0.7)
+
 # add colorbar
 fig = ax.get_figure()
 cax = fig.add_axes([0.8, 0.15, 0.015, 0.3])
